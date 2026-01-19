@@ -17,19 +17,34 @@ if [[ $DRY_RUN_FLAG == "false" ]]; then
     . $BUILD_DIR/util/adobe-cfpm.sh
 fi
 
-
-logMessage "INFO" "$( box server start \
-    trayEnable=false \
-    host=0.0.0.0 \
-    openbrowser=false \
-    port=${PORT} \
-    sslPort=${SSL_PORT} \
-    saveSettings=false  \
-    dryRun=${DRY_RUN_FLAG} \
-    console=${DRY_RUN_FLAG} \
-    startScript=${SCRIPT_TYPE} \
-    startScriptFile=${APP_DIR}/server-start.sh \
-    verbose=true )"
+# Check if server.json has any listen bindings defined - if so we skip port settings
+DEFINED_SERVERCONFIGFILE=${BOX_SERVER_SERVERCONFIGFILE:=server.json}
+if [[ -f "${DEFINED_SERVERCONFIGFILE}" ]] && [[ "$(jq 'any(.sites[]?; .bindings[]?.listen)' "${DEFINED_SERVERCONFIGFILE}")" == "true" ]]; then
+    logMessage "INFO" "Detected custom multi-site listen bindings in ${DEFINED_SERVERCONFIGFILE}, skipping port and sslPort settings"
+	logMessage "INFO" "$( box server start \
+		trayEnable=false \
+		host=0.0.0.0 \
+		openbrowser=false \
+		saveSettings=false  \
+		dryRun=${DRY_RUN_FLAG} \
+		console=${DRY_RUN_FLAG} \
+		startScript=${SCRIPT_TYPE} \
+		startScriptFile=${APP_DIR}/server-start.sh \
+		verbose=true )"
+else
+	logMessage "INFO" "$( box server start \
+		trayEnable=false \
+		host=0.0.0.0 \
+		openbrowser=false \
+		port=${PORT} \
+		sslPort=${SSL_PORT} \
+		saveSettings=false  \
+		dryRun=${DRY_RUN_FLAG} \
+		console=${DRY_RUN_FLAG} \
+		startScript=${SCRIPT_TYPE} \
+		startScriptFile=${APP_DIR}/server-start.sh \
+		verbose=true )"
+fi
 
 # Adobe 2021 package manager installs after the server files are in place
 if [[ $DRY_RUN_FLAG == "true" ]]; then
