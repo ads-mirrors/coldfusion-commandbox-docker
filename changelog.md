@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ----
+## [6.3.3/3.18.0]
+
+### Changed
+- CommandBox version changed to `6.3.3`
+- Update JVM/JRE Versions
+- Adobe ColdFusion 2025 to `2025.0.08+331874`
+
 ## [6.3.2/3.17.0]
 
 ### Changed
