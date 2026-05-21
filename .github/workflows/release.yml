@@ -291,8 +291,8 @@ jobs:
           DOCKER_IMAGE: ortussolutions/commandbox
           BUILD_IMAGE_TAGS: ${{ matrix.BUILD_IMAGE_TAGS }}
           BASE_IMAGE: ${{ matrix.BASE_IMAGE }}
-          COMMANDBOX_VERSION: 6.3.3-rc
-          IMAGE_VERSION: 3.17.0
+          COMMANDBOX_VERSION: 6.3.3
+          IMAGE_VERSION: 3.18.0
         run: |
           # Split the comma-separated tags
           IFS=',' read -ra TAG_ARRAY <<< "$BUILD_IMAGE_TAGS"
