@@ -8,7 +8,7 @@ LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
 
 #Hard Code our engine environment
-ENV BOX_SERVER_APP_CFENGINE=adobe@2025.0.10+331899
+ENV BOX_SERVER_APP_CFENGINE=adobe@2025.0.11+331909
 
 # WARM UP THE SERVER
 RUN ${BUILD_DIR}/util/warmup-server.sh
