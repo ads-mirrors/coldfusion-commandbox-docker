@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ----
 ## [Unreleased]
 
+## [6.3.4/3.22.0]
+
+### Changed
+- CommandBox version changed to `6.3.4`
+- Adobe ColdFusion 2023 to `2023.0.23+330940`
+- Adobe  ColdFusion 2025 to `2025.0.12+331922`
+
 ## [6.3.3/3.21.0]
 
 ### Changed
