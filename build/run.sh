@@ -58,6 +58,8 @@ else
 		chown -R $USER:$WORKGROUP $HOME
 		chown -R $USER:$WORKGROUP $APP_DIR
 		chown -R $USER:$WORKGROUP $BUILD_DIR
+		mv $COMMANDBOX_HOME $HOME/.CommandBox
+		export COMMANDBOX_HOME=$HOME/.CommandBox
 		chown -R $USER:$WORKGROUP $COMMANDBOX_HOME
 		mv /root/.boxlang $HOME/.boxlang
 		chown -R $USER:$WORKGROUP $HOME/.boxlang

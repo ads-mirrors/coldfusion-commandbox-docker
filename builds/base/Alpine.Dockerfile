@@ -36,7 +36,7 @@ ENV BUILD_DIR=$LIB_DIR/build
 WORKDIR $BUILD_DIR
 
 # COMMANDBOX_HOME = Where CommmandBox Lives
-ENV COMMANDBOX_HOME=$LIB_DIR/CommandBox
+ENV COMMANDBOX_HOME=$HOME/.CommandBox
 
 # Copy file system
 COPY ./test/ ${APP_DIR}/
