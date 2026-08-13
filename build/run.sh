@@ -59,7 +59,9 @@ else
 		chown -R $USER:$WORKGROUP $APP_DIR
 		chown -R $USER:$WORKGROUP $BUILD_DIR
 		chown -R $USER:$WORKGROUP $COMMANDBOX_HOME
-		chown -R /usr/local/boxlang
+		mv /root/.boxlang $HOME/.boxlang
+		chown -R $USER:$WORKGROUP $HOME/.boxlang
+		chown -R $USER:$WORKGROUP /usr/local/boxlang
 		chown -R root:$WORKGROUP $BIN_DIR
 		chmod g+wrx $BIN_DIR
 		mkdir -p ${LIB_DIR}/serverHome
