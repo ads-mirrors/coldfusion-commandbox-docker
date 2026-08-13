@@ -16,7 +16,7 @@ if [[ -f $BIN_DIR/startup-final.sh ]]; then
 	if [[ $USER ]] && [[ $USER != $(whoami) ]]; then
 		if [[ -f /etc/alpine-release ]]; then
 			su -p -c $BIN_DIR/startup-final.sh $USER
-		else 
+		else
 			su --preserve-environment -c $BIN_DIR/startup-final.sh $USER
 		fi
 	else
@@ -36,7 +36,7 @@ else
 			export USER_ID=1001
 		fi
 		export HOME=/home/$USER
-			
+
 		if [[ -f /etc/alpine-release ]]; then
 			# If the user exists then we skip the directory migrations as the container is in restart
 			if ! id -u $USER > /dev/null 2>&1; then
@@ -46,12 +46,12 @@ else
 		else
 			# If the user exists then we skip the directory migrations as the container is in restart
 			if ! id -u $USER > /dev/null 2>&1; then
-				useradd -u $USER_ID $USER 
+				useradd -u $USER_ID $USER
 				usermod -a -G $WORKGROUP $USER
 				# Ensure our user home directory exists - we need to create it manually for Alpine builds
 				mkdir -p $HOME
 			fi
-			
+
 		fi
 
 		# Ensure permissions on relevant directories and any files created previously
@@ -59,11 +59,12 @@ else
 		chown -R $USER:$WORKGROUP $APP_DIR
 		chown -R $USER:$WORKGROUP $BUILD_DIR
 		chown -R $USER:$WORKGROUP $COMMANDBOX_HOME
+		chown -R /usr/local/boxlang
 		chown -R root:$WORKGROUP $BIN_DIR
 		chmod g+wrx $BIN_DIR
 		mkdir -p ${LIB_DIR}/serverHome
 		chown -R $USER:$WORKGROUP ${LIB_DIR}/serverHome
-		
+
 
 		if [ $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]; then
 			chown -R $USER $BOX_SERVER_APP_SERVERHOMEDIRECTORY
@@ -74,7 +75,7 @@ else
 
 		if [[ -f /etc/alpine-release ]]; then
 			su -p -c $BUILD_DIR/run.sh $USER
-		else 
+		else
 			su --preserve-environment -c $BUILD_DIR/run.sh $USER
 		fi
 
@@ -91,11 +92,11 @@ else
 		# Check for a defined server home directory in server.json
 		if [[ -f ${BOX_SERVER_SERVERCONFIGFILE:=server.json} ]]; then
 
-			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]]; then	
+			if [[ ! $BOX_SERVER_APP_SERVERHOMEDIRECTORY ]]; then
 				BOX_SERVER_APP_SERVERHOMEDIRECTORY=`cat ${BOX_SERVER_SERVERCONFIGFILE:=server.json} | jq -r '.app.serverHomeDirectory'`
 			fi
 
-			if [[ ! $BOX_SERVER_APP_CFENGINE ]]; then	
+			if [[ ! $BOX_SERVER_APP_CFENGINE ]]; then
 				BOX_SERVER_APP_CFENGINE=`cat ${BOX_SERVER_SERVERCONFIGFILE:=server.json} | jq -r '.app.cfengine'`
 			fi
 
@@ -119,14 +120,14 @@ else
 
 		fi
 
-		# Default values for engine and home directory - so we can use cfconfig 
+		# Default values for engine and home directory - so we can use cfconfig
 		export BOX_SERVER_APP_SERVERHOMEDIRECTORY="${BOX_SERVER_APP_SERVERHOMEDIRECTORY:=${LIB_DIR}/serverHome}"
 
 		if [[ !BOX_SERVER_CFCONFIGFILE ]] && [[ -f .cfconfig.json ]]; then
-			logMessage "INFO" "Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"	
+			logMessage "INFO" "Convention .cfconfig.json found at $APP_DIR/.cfconfig.json"
 		fi
 
-		logMessage "INFO" "Server Home Directory set to: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"	
+		logMessage "INFO" "Server Home Directory set to: ${BOX_SERVER_APP_SERVERHOMEDIRECTORY}"
 
 		# If box install flag is up, do installation
 		if [[ $BOX_INSTALL ]] || [[ $box_install ]]; then
