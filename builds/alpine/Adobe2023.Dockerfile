@@ -5,6 +5,8 @@ FROM ${BASE_IMAGE_ARG}
 LABEL maintainer "Jon Clausen <jclausen@ortussolutions.com>"
 LABEL repository "https://github.com/Ortus-Solutions/docker-commandbox"
 
+RUN box config set server.defaults.jvm.javaVersion=openjdk17_jdk_jdk
+
 #Hard Code our engine environment
 ENV BOX_SERVER_APP_CFENGINE=adobe@2023.0.23+330940
 

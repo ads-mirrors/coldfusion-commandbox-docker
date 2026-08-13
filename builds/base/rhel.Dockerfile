@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11-jre-ubi10-minimal
+FROM eclipse-temurin:21-jre-ubi10-minimal
 
 ARG COMMANDBOX_VERSION
 
