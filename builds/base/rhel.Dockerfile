@@ -31,6 +31,9 @@ WORKDIR $BUILD_DIR
 # COMMANDBOX_HOME = Where CommmandBox Lives
 ENV COMMANDBOX_HOME=$HOME/.CommandBox
 
+# BOXLANG HOME = Where BoxLang Lives
+ENV BOXLANG_HOME=$HOME/.boxlang
+
 # APP_DIR = the directory where the application runs
 ENV APP_DIR=/app
 WORKDIR $APP_DIR

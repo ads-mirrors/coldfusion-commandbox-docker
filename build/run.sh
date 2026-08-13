@@ -61,8 +61,9 @@ else
 		mv $COMMANDBOX_HOME $HOME/.CommandBox
 		export COMMANDBOX_HOME=$HOME/.CommandBox
 		chown -R $USER:$WORKGROUP $COMMANDBOX_HOME
-		mv /root/.boxlang $HOME/.boxlang
-		chown -R $USER:$WORKGROUP $HOME/.boxlang
+		mv $BOXLANG_HOME $HOME/.boxlang
+		export BOXLANG_HOME=$HOME/.boxlang
+		chown -R $USER:$WORKGROUP $BOXLANG_HOME
 		chown -R $USER:$WORKGROUP /usr/local/boxlang
 		chown -R root:$WORKGROUP $BIN_DIR
 		chmod g+wrx $BIN_DIR
